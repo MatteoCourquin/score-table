@@ -1,21 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { animated, useTransition } from 'react-spring';
 import Row from './components/Row';
 
 const App = () => {
-  const [teams, setTeams] = useState([
-    { name: 'Boring Team', score: 1 },
-    { name: 'Cool Team', score: 1 },
-    { name: 'Awesome Team', score: 1 },
-    { name: 'Amazing Team', score: 1 },
-    { name: 'Fantastic Team', score: 1 },
-    { name: 'Incredible Team', score: 1 },
-    { name: 'Marvelous Team', score: 1 },
-    { name: 'Spectacular Team', score: 1 },
-    { name: 'Terrific Team', score: 1 },
-    { name: 'Wonderful Team', score: 1 },
-  ]);
-
+  const teamsFromLocalStorage = JSON.parse(localStorage.getItem('teams'));
+  const [teams, setTeams] = useState([...teamsFromLocalStorage]);
   const [rows, setRows] = useState(teams);
   const height = 120;
   const transitions = useTransition(
@@ -31,28 +20,34 @@ const App = () => {
     }
   );
 
+  const saveTeamsOnLocalStorage = () => {
+    localStorage.setItem('teams', JSON.stringify(teams));
+  };
+
   const handleDecrement = (index) => {
     setTeams((prevState) => {
       const newTeams = [...prevState];
-      newTeams[index].score --;
+      newTeams[index].score--;
       return newTeams;
     });
+    saveTeamsOnLocalStorage();
   };
 
   const handleIncrement = (index) => {
     setTeams((prevState) => {
       const newTeams = [...prevState];
-      newTeams[index].score ++;
+      newTeams[index].score++;
       return newTeams;
     });
+    saveTeamsOnLocalStorage();
   };
 
   return (
-    <div>
+    <div className='flex justify-center'>
       {transitions(({ y, ...rest }, item, { key }, index) => (
         <animated.div
           key={key}
-          className='w-full px-3'
+          className='w-full px-3 max-w-5xl'
           style={{
             transform: y.to((y) => `translate3d(0,${y}px,0)`),
             ...rest,
