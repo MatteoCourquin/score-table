@@ -6,9 +6,13 @@
   box-sizing: border-box;
   font-family: $font-roboto-black;
   font-size: clamp(1.1rem, 3vw, 3rem);
-  color: $color-secondary;
 }
 
 body{
-  background: $color-primary;
+  min-height: 100vh;
+  background: url(../images/background.png) no-repeat center center/cover;
+}
+
+.bg-image-blue{
+  background: url(../images/background-blue.png) no-repeat right;
 }
