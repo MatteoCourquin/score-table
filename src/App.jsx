@@ -58,14 +58,14 @@ const App = () => {
   return (
     <div className='min-h-screen'>
       <h1 className='text-center text-4xl py-10'>
-        <span className='text-primary shadow-text-primary font-epitah'>TABLEAUX DES</span>
-        <span className='text-secondary shadow-text-secondary font-epitah'> SCORES</span>
+        <span className='text-primary shadow-text-primary font-eulogy'>TABLEAUX DES</span>
+        <span className='text-secondary shadow-text-secondary font-eulogy'> SCORES</span>
       </h1>
       <div className='px-4 grid grid-cols-template'>
         <div className='flex shadow-text-primary'>
           <Line dark={false} />
           <div className='pl-4'>
-            <p className='text-primary text-4xl font-epitah'>RANG</p>
+            <p className='text-primary text-4xl font-eulogy'>RANG</p>
             {teamsAsso.map((team, index) => {
               return (
                 <div>
