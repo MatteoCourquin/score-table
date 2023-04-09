@@ -1,8 +1,7 @@
-import { GraphQLClient, gql } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
 
-const endpoint =
-  'https://mm6sp4prrbc5rjs7vqugyhg7ti.appsync-api.eu-west-1.amazonaws.com/graphql';
-const apiKey = 'da2-qydhzgk3tfb5zceto76fznlufy';
+const endpoint = 'https://kshjgzmtbrho3dzgi5egeizj2q.appsync-api.eu-west-1.amazonaws.com/graphql';
+const apiKey = 'da2-dxgapaqjjze3rdhbvjlhm4vppy'
 
 const client = new GraphQLClient(endpoint, {
   headers: {

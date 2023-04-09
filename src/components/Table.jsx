@@ -5,7 +5,7 @@ const Table = ({ teams, dark, isAsso }) => {
     <div className='w-full px-4 justify-center relative'>
       <Row style={'text-4xl font-eulogy'} dark={dark} teamName={isAsso ? 'ASSO' : 'NOM'} teamScore='SCORE' />
       {teams
-        .sort((a, b) => a.score - b.score)
+        .sort((a, b) => b.score - a.score)
         .map((team, index) => {
           return (
             <Row
