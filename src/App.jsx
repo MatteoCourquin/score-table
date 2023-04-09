@@ -1,56 +1,17 @@
-import { GraphQLClient, gql } from 'graphql-request';
 import { useEffect, useState } from 'react';
 import Line from './components/Line';
 import Table from './components/Table';
+import { getTeams } from './services/queries';
+import { addTeam } from './services/mutations';
 
 const App = () => {
   const [teamsAsso, setTeamAsso] = useState([]);
 
-  const endpoint =
-    'https://mm6sp4prrbc5rjs7vqugyhg7ti.appsync-api.eu-west-1.amazonaws.com/graphql';
-  const apiKey = 'da2-qydhzgk3tfb5zceto76fznlufy';
-
-  const client = new GraphQLClient(endpoint, {
-    headers: {
-      'x-api-key': apiKey,
-    },
-  });
-
-  const mutation = gql`
-    mutation {
-      createTeam(name: "The Team 8", score: "20") {
-        name
-        score
-      }
-    }
-  `;
-
-  const query = `
-    query getTeam {
-      getTeam(name: "Awesome Team") {
-        name
-        score
-      }
-    }
-  `;
-
-  const queryAll = `
-    query getAllTeams {
-      getAllTeams {
-        name
-        score
-      }
-    }
-  `;
-
   useEffect(() => {
-    // client.request(mutation).then((data) => console.log(data));
-    client
-      .request(queryAll)
-      .then((data) => {
-        setTeamAsso(data.getAllTeams);
-      })
-      .catch((error) => console.error(error));
+    getTeams().then((data) => {
+      setTeamAsso(data.getAllTeams);
+    });
+    // addTeam('super test', 10)
   }, []);
 
   return (
