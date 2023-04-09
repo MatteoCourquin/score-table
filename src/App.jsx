@@ -1,26 +1,12 @@
-import request, { GraphQLClient, gql } from 'graphql-request';
+import { GraphQLClient, gql } from 'graphql-request';
 import { useEffect, useState } from 'react';
-import Table from './components/Table';
 import Line from './components/Line';
+import Table from './components/Table';
+// import './fonts/Arpona-Regular.otf'
+// import './fonts/Eulogy-Regular.ttf'
 
 const App = () => {
-  const [teamsAsso, setTeamAsso] = useState([
-    { name: 'Team 1', score: 10 },
-    { name: 'Team 2', score: 20 },
-    { name: 'Team 4', score: 40 },
-    { name: 'Team 7', score: 70 },
-    { name: 'Team 6', score: 60 },
-    { name: 'Team 5', score: 50 },
-    { name: 'Team 3', score: 30 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-    { name: 'Team 8', score: 80 },
-  ]);
+  const [teamsAsso, setTeamAsso] = useState([]);
 
   const endpoint =
     'https://mm6sp4prrbc5rjs7vqugyhg7ti.appsync-api.eu-west-1.amazonaws.com/graphql';
@@ -64,38 +50,42 @@ const App = () => {
     client
       .request(queryAll)
       .then((data) => {
-        // setTeamAsso(data.getAllTeams);
+        setTeamAsso(data.getAllTeams);
       })
       .catch((error) => console.error(error));
   }, []);
 
   return (
     <div className='min-h-screen'>
-      <h1 className='text-center'><span className="text-primary">Tableau Des</span><span className="text-secondary"> Scores</span></h1>
-      <div className='flex gap-4 px-4'>
-        <Line dark={false} />
-        <div>
-          <p className='text-primary'>Score</p>
-          {teamsAsso.map((team, index) => {
-            return (
-              <div>
-                <p className='whitespace-nowrap text-primary'>
-                  {index + 1} <span className='text-sm'>e</span>
-                </p>
-              </div>
-            );
-          })}
+      <h1 className='text-center text-4xl py-10'>
+        <span className='text-primary shadow-text-primary font-epitah'>TABLEAUX DES</span>
+        <span className='text-secondary shadow-text-secondary font-epitah'> SCORES</span>
+      </h1>
+      <div className='px-4 grid grid-cols-template'>
+        <div className='flex shadow-text-primary'>
+          <Line dark={false} />
+          <div className='pl-4'>
+            <p className='text-primary text-4xl font-epitah'>RANG</p>
+            {teamsAsso.map((team, index) => {
+              return (
+                <div>
+                  <p className='whitespace-nowrap text-primary'>
+                    {index + 1} <span className='text-sm'>e</span>
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className='w-full'>
-          <Table dark={false} teams={teamsAsso} />
+        <div className='flex w-full shadow-text-primary pr-[2vw]'>
+          <Table isAsso={true} dark={false} teams={teamsAsso} />
+          <Line dark={false} />
         </div>
-        <Line dark={false} />
-        <div className='w-32'></div>
-        <Line dark={true} />
-        <div className='w-full'>
-          <Table dark={true} teams={teamsAsso} />
+        <div className='flex w-full shadow-text-secondary pl-[7vw]'>
+          <Line dark={true} />
+          <Table isAsso={false} dark={true} teams={teamsAsso} />
+          <Line dark={true} />
         </div>
-        <Line dark={true} />
       </div>
     </div>
   );

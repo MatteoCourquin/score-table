@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "eulogy-regular";
+  src: local("Epitah"),
+    url("./fonts/Eulogy-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "arpona-regular";
+  src: local("Arpona"),
+    url("./fonts/Arpona-Regular.otf") format("truetype");
+  font-weight: bold;
+}

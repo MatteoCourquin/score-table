@@ -4,8 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: $font-roboto-black;
-  font-size: clamp(1.1rem, 3vw, 3rem);
+  font-family: $font-arpona;
 }
 
 body{
@@ -15,4 +14,25 @@ body{
 
 .bg-image-blue{
   background: url(../images/background-blue.png) no-repeat right;
+}
+
+.shadow-text-primary{
+  text-shadow: 0 0 10px #F7DEA7;
+}
+.shadow-text-secondary{
+  text-shadow: 0 0 10px #212857;
+}
+
+.shadow-box-primary{
+  box-shadow: 0 0 10px #F7DEA7;
+}
+.shadow-box-secondary{
+  box-shadow: 0 0 10px #212857;
+}
+
+.font-epitah{
+  font-family: $font-eulogy;
+}
+.font-arpona{
+  font-family: $font-arpona;
 }

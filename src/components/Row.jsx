@@ -1,10 +1,10 @@
 import clsx from "clsx";
 
-const Row = ({ teamName, teamScore, dark }) => {
+const Row = ({ teamName, teamScore, dark, style }) => {
   return (
-    <div className={clsx(dark ? 'text-secondary' : 'text-primary' ,'flex w-full justify-between items-center')}>
-      <p>{teamName}</p>
-      <p className='inline-block w-12 text-right'>{teamScore}</p>
+    <div className={clsx(dark ? 'text-secondary' : 'text-primary' ,'flex justify-between items-center', style)}>
+      <p className={"whitespace-nowrap text-ellipsis" + style}>{teamName}</p>
+      <p className={'whitespace-nowrap inline-block text-right' + style}>{teamScore}</p>
     </div>
   );
 };
