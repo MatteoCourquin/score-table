@@ -2,8 +2,6 @@ import { GraphQLClient, gql } from 'graphql-request';
 import { useEffect, useState } from 'react';
 import Line from './components/Line';
 import Table from './components/Table';
-// import './fonts/Arpona-Regular.otf'
-// import './fonts/Eulogy-Regular.ttf'
 
 const App = () => {
   const [teamsAsso, setTeamAsso] = useState([]);
@@ -57,7 +55,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen'>
-      <h1 className='text-center text-4xl py-10'>
+      <h1 className='text-center text-6xl py-10'>
         <span className='text-primary shadow-text-primary font-eulogy'>TABLEAUX DES</span>
         <span className='text-secondary shadow-text-secondary font-eulogy'> SCORES</span>
       </h1>
