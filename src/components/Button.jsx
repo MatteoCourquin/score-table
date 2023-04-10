@@ -7,9 +7,9 @@ const ButtonTypes = {
   DELETE: 'delete',
 };
 
-const Button = ({ value, onClick, type = ButtonTypes.CLICK }) => {
+const Button = ({ style, value, onClick, type = ButtonTypes.CLICK }) => {
   const buttonClass = clsx(
-    'font-sans font-bold py-1 px-3 rounded',
+    style, 'font-sans font-bold py-1 px-3 rounded',
     {
       'bg-blue-500 hover:bg-blue-700 text-white': type === ButtonTypes.CLICK,
       'bg-green-500 hover:bg-green-700 text-white': type === ButtonTypes.VALIDATE,

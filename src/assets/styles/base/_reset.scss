@@ -5,15 +5,21 @@
   padding: 0;
   box-sizing: border-box;
   font-family: $font-arpona;
+  @media screen and (max-width : 639px) {
+    color: $color-primary !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 }
-
 body{
   min-height: 100vh;
-  background: url(../images/background.png) no-repeat center center/cover;
 }
 
-.bg-image-blue{
-  background: url(../images/background-blue.png) no-repeat right;
+.background-main{
+  background: url(../images/background.png) no-repeat center center/cover;
+  @media screen and (max-width : 639px) {
+    background: url(../images/background-mobile.png) no-repeat center center/cover;
+  }
 }
 
 .shadow-text-primary{
