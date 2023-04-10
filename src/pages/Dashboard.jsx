@@ -4,8 +4,8 @@ import Table from '../components/Table';
 
 const Dashboard = ({ teamsQuery, namesQuery }) => {
   return (
-    <div className='min-h-screen background-main'>
-      <h1 className='text-center text-5xl sm:text-6xl py-10 px-4'>
+    <div className='min-h-screen background-main py-10'>
+      <h1 className='text-center text-5xl sm:text-7xl px-4'>
         <span className='text-primary shadow-text-primary font-eulogy'>
           TABLEAUX DES
         </span>
@@ -14,23 +14,27 @@ const Dashboard = ({ teamsQuery, namesQuery }) => {
           SCORES
         </span>
       </h1>
+      <p className='text-center text-xl pb-10 font-arpona'>20 points <span className='font-sans'>=</span> Conso</p>
       <div className='px-4 grid grid-cols-1 sm:grid-cols-template'>
-        <div className='hidden sm:flex shadow-text-primary'>
+        <div className='hidden lg sm:flex shadow-text-primary'>
           <Line style='hidden sm:flex' dark={false} />
           <div className='pl-4'>
-            <p className='text-primary text-3xl sm:text-4xl font-eulogy'>
+            <p className='text-primary text-3xl sm:text-4xl lg:text-5xl font-eulogy'>
               RANG
             </p>
             {teamsQuery.isFetched &&
-              teamsQuery.data.getAllData.map((team, index) => {
+              namesQuery.isFetched &&
+              (teamsQuery.data.getAllData.length >=
+              namesQuery.data.getAllData.length
+                ? teamsQuery.data.getAllData
+                : namesQuery.data.getAllData
+              ).map((team, index) => {
                 return (
                   <div key={index}>
                     <p
                       className={clsx(
-                        'whitespace-nowrap text-primary font-sans',
-                        index == 0 && 'text-2xl',
-                        index == 1 && 'text-xl',
-                        index == 2 && 'text-lg'
+                        'whitespace-nowrap text-primary font-sans text-xl',
+                        index < 3 && 'text-4xl'
                       )}
                     >
                       {index + 1}{' '}

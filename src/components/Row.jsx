@@ -5,11 +5,11 @@ const Row = ({ name, score, dark, style }) => {
     <div
       className={clsx(
         dark ? 'text-secondary' : 'text-primary',
-        'flex justify-between items-center',
+        'flex justify-between items-center text-xl',
         style
       )}
     >
-      <p className='whitespace-nowrap text-ellipsis'>{name}</p>
+      <p className='capitalize whitespace-nowrap text-ellipsis'>{name}</p>
       <p className='whitespace-nowrap inline-block text-right font-sans'>
         {score}
       </p>

@@ -10,7 +10,7 @@ const client = new GraphQLClient(endpoint, {
   },
 });
 
-export const addTeam = (name, score) => {
+export const addTeam = ({ name, score }) => {
   return client.request(`
     mutation {
       createTeam(name: "${name}", score: "${score}") {

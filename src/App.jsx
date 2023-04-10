@@ -71,6 +71,12 @@ const App = () => {
             />
           }
         />
+        <Route
+          path='*'
+          element={
+            <Dashboard namesQuery={namesQuery} teamsQuery={teamsQuery} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

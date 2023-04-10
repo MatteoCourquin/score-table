@@ -10,7 +10,7 @@ function AddTeam({ isAsso, addMutation }) {
     <>
       <button
         type='button'
-        className='fixed bottom-4 right-4 font-sans bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center'
+        className='fixed bottom-4 text-center right-4 font-sans font-medium bg-blue-500 hover:bg-blue-700 !text-white rounded-full w-12 h-12 flex items-center justify-center'
         onClick={() => setIsOpen(true)}
       >
         +
@@ -20,7 +20,7 @@ function AddTeam({ isAsso, addMutation }) {
           <div className='bg-white rounded-lg p-6 w-96'>
             <div className='mb-4'>
               <label
-                className='block text-gray-700 font-bold mb-2'
+                className='font-sans block text-gray-700 font-bold mb-2'
                 htmlFor='name'
               >
                 {isAsso ? "Nom de l'asso" : 'Nom du joueur'}
@@ -35,7 +35,7 @@ function AddTeam({ isAsso, addMutation }) {
             </div>
             <div className='mb-4'>
               <label
-                className='block text-gray-700 font-bold mb-2'
+                className='font-sans block text-gray-700 font-bold mb-2'
                 htmlFor='score'
               >
                 {isAsso ? "Score de l'asso" : 'Score du joueur'}
@@ -51,12 +51,19 @@ function AddTeam({ isAsso, addMutation }) {
             <div className='flex justify-end gap-2'>
               <Button
                 type='cancel'
-                value='Cancel'
+                value='Annuler'
+                onClick={() => setIsOpen(false)}
+              />
+              <Button
+                type='validate'
+                value={addMutation.isLoading ? 'load' : 'Ajouter'}
                 onClick={() => {
-                  addMutation.mutate({ name, score }), setIsOpen(false);
+                  addMutation.mutate({ name, score });
+                  setName('');
+                  setScore('');
+                  setIsOpen(false);
                 }}
               />
-              <Button type='validate' value='Add' />
             </div>
           </div>
         </div>

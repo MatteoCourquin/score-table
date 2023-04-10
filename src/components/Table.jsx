@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import Loader from './Loader';
+import { Loader } from './Icons';
 import Row from './Row';
 
 const Table = ({ query, dark, isAsso }) => {
@@ -13,14 +13,14 @@ const Table = ({ query, dark, isAsso }) => {
         )}
       >
         <Link
-          className='text-3xl sm:text-4xl font-eulogy whitespace-nowrap text-ellipsis'
+          className='text-3xl sm:text-4xl lg:text-5xl font-eulogy whitespace-nowrap text-ellipsis'
           to={isAsso ? 'admin-asso' : 'admin-name'}
         >
           {isAsso ? 'ASSO' : 'JOUEUR'}
         </Link>
         <p
           className={
-            'text-3xl sm:text-4xl font-eulogy whitespace-nowrap inline-block text-right'
+            'text-3xl sm:text-4xl lg:text-5xl font-eulogy whitespace-nowrap inline-block text-right'
           }
         >
           SCORE
@@ -34,11 +34,7 @@ const Table = ({ query, dark, isAsso }) => {
             return (
               <Row
                 key={index}
-                style={clsx(
-                  index == 0 && 'text-2xl',
-                  index == 1 && 'text-xl',
-                  index == 2 && 'text-lg'
-                )}
+                style={clsx(index < 3 && 'text-4xl')}
                 dark={dark}
                 name={data.name}
                 score={data.score}

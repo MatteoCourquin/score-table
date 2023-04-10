@@ -8,6 +8,7 @@
     url("./fonts/Eulogy-Regular.ttf") format("truetype");
   font-weight: bold;
 }
+
 @font-face {
   font-family: "arpona-regular";
   src: local("Arpona"),

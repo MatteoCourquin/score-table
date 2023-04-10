@@ -11,7 +11,7 @@ export default {
         secondary: "#F7DEA7",
       },
       gridTemplateColumns: {
-        "template": "120px 1fr 1fr",
+        "template": "12vw 1fr 1fr",
       }
     },
   },
