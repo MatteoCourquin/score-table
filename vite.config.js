@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['graphql']
-  }
+  },
+  define: { global: {} }
 })

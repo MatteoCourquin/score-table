@@ -3,14 +3,45 @@ import { Link } from 'react-router-dom';
 import { Loader } from './Icons';
 import Row from './Row';
 import { useEffect, useState } from 'react';
+import { API, graphqlOperation } from 'aws-amplify';
+import { subscriptionNameQuery, subscriptionTeamQuery } from '../services/api';
 
 const Table = ({ query, dark, isAsso }) => {
-  const [data, setData] = useState([]);
+  const [dataTeams, setDataTeams] = useState([]);
+  const [dataNames, setDataNames] = useState([]);
+
   useEffect(() => {
     if (query.isFetched) {
-      setData(isAsso ? query.data.getAllTeams : query.data.getAllNames);
+      if (isAsso) {
+        setDataTeams([...query.data.getAllTeams]);
+      } else {
+        setDataNames([...query.data.getAllNames]);
+      }
     }
-  }, [query, isAsso]);
+  }, [query.data]);
+
+  useEffect(() => {
+    if (isAsso) {
+      const subscriptionTeams = API.graphql(
+        graphqlOperation(subscriptionTeamQuery)
+      ).subscribe({
+        next: ({ provider, value }) => {
+          setDataTeams([...dataTeams, value.data.onTeamUpdate]);
+        },
+        error: (error) => console.warn(error),
+      });
+    } else {
+      const subscriptionNames = API.graphql(
+        graphqlOperation(subscriptionNameQuery)
+      ).subscribe({
+        next: ({ provider, value }) => {
+          setDataNames([...dataNames, value.data.onNameUpdate]);
+        },
+        error: (error) => console.warn(error),
+      });
+    }
+  }, [dataTeams, dataNames]);
+
   return (
     <div className='w-full px-4 justify-center relative pb-10 sm:pb-0'>
       <div
@@ -35,7 +66,23 @@ const Table = ({ query, dark, isAsso }) => {
       </div>
       {query.isLoading && <Loader />}
       {query.isFetched &&
-        data
+        isAsso &&
+        dataTeams
+          .sort((a, b) => b.score - a.score)
+          .map((data, index) => {
+            return (
+              <Row
+                key={index}
+                style={clsx(index < 3 && 'text-4xl')}
+                dark={dark}
+                name={data.name}
+                score={data.score}
+              />
+            );
+          })}
+      {query.isFetched &&
+        !isAsso &&
+        dataNames
           .sort((a, b) => b.score - a.score)
           .map((data, index) => {
             return (

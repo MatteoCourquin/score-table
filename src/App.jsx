@@ -10,17 +10,21 @@ import {
   getAllNames,
   getAllTeams,
   updateName,
-  updateTeam
+  updateTeam,
 } from './services/api';
 
 const App = () => {
+ 
+
   const teamsQuery = useQuery({
     queryKey: 'teams',
     queryFn: () => getAllTeams(),
+    // refetchInterval: 10000,
   });
   const namesQuery = useQuery({
     queryKey: 'names',
     queryFn: () => getAllNames(),
+    // refetchInterval: 10000,
   });
   const updateTeamMutation = useMutation({
     mutationFn: updateTeam,

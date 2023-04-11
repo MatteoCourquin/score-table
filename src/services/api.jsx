@@ -1,4 +1,5 @@
-import { GraphQLClient, gql } from 'graphql-request';
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { gql, GraphQLClient } from 'graphql-request';
 
 const endpoint =
   'https://3nhzv3yib5aqfherckwq5z6i3i.appsync-api.eu-west-1.amazonaws.com/graphql';
@@ -9,6 +10,34 @@ const client = new GraphQLClient(endpoint, {
     'x-api-key': apiKey,
   },
 });
+
+const myAppConfig = {
+  aws_appsync_graphqlEndpoint:
+    'https://3nhzv3yib5aqfherckwq5z6i3i.appsync-api.eu-west-1.amazonaws.com/graphql',
+  aws_appsync_region: 'eu-west-1',
+  aws_appsync_authenticationType: 'API_KEY',
+  aws_appsync_apiKey: 'da2-zqdvhftytfhujagxtlesedrmkq',
+};
+
+Amplify.configure(myAppConfig);
+
+export const subscriptionNameQuery = gql`
+  subscription {
+    onNameUpdate {
+      name
+      score
+    }
+  }
+`;
+
+export const subscriptionTeamQuery = gql`
+  subscription {
+    onTeamUpdate {
+      name
+      score
+    }
+  }
+`;
 
 export const createTeam = ({ name, score }) => {
   return client.request(`
