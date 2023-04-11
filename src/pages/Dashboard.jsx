@@ -14,7 +14,9 @@ const Dashboard = ({ teamsQuery, namesQuery }) => {
           SCORES
         </span>
       </h1>
-      <p className='text-center text-xl pb-10 font-arpona'>20 points <span className='font-sans'>=</span> Conso</p>
+      <p className='text-primary text-center text-xl pb-10 font-arpona'>
+        20 points <span className='font-sans'>=</span> Conso
+      </p>
       <div className='px-4 grid grid-cols-1 sm:grid-cols-template'>
         <div className='hidden lg sm:flex shadow-text-primary'>
           <Line style='hidden sm:flex' dark={false} />
@@ -24,10 +26,10 @@ const Dashboard = ({ teamsQuery, namesQuery }) => {
             </p>
             {teamsQuery.isFetched &&
               namesQuery.isFetched &&
-              (teamsQuery.data.getAllData.length >=
-              namesQuery.data.getAllData.length
-                ? teamsQuery.data.getAllData
-                : namesQuery.data.getAllData
+              (teamsQuery.data.getAllTeams.length >=
+              namesQuery.data.getAllNames.length
+                ? teamsQuery.data.getAllTeams
+                : namesQuery.data.getAllNames
               ).map((team, index) => {
                 return (
                   <div key={index}>

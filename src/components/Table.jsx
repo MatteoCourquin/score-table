@@ -2,8 +2,15 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Loader } from './Icons';
 import Row from './Row';
+import { useEffect, useState } from 'react';
 
 const Table = ({ query, dark, isAsso }) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (query.isFetched) {
+      setData(isAsso ? query.data.getAllTeams : query.data.getAllNames);
+    }
+  }, [query, isAsso]);
   return (
     <div className='w-full px-4 justify-center relative pb-10 sm:pb-0'>
       <div
@@ -28,7 +35,7 @@ const Table = ({ query, dark, isAsso }) => {
       </div>
       {query.isLoading && <Loader />}
       {query.isFetched &&
-        query.data.getAllData
+        data
           .sort((a, b) => b.score - a.score)
           .map((data, index) => {
             return (

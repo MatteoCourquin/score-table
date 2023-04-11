@@ -2,17 +2,25 @@ import { useMutation, useQuery } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Admin from './pages/Admin';
 import Dashboard from './pages/Dashboard';
-import { addName, deleteName, getNames, updateName } from './services/apiNames';
-import { addTeam, deleteTeam, getTeams, updateTeam } from './services/apiTeams';
+import {
+  createName,
+  createTeam,
+  deleteName,
+  deleteTeam,
+  getAllNames,
+  getAllTeams,
+  updateName,
+  updateTeam
+} from './services/api';
 
 const App = () => {
   const teamsQuery = useQuery({
     queryKey: 'teams',
-    queryFn: () => getTeams(),
+    queryFn: () => getAllTeams(),
   });
   const namesQuery = useQuery({
     queryKey: 'names',
-    queryFn: () => getNames(),
+    queryFn: () => getAllNames(),
   });
   const updateTeamMutation = useMutation({
     mutationFn: updateTeam,
@@ -30,12 +38,12 @@ const App = () => {
     mutationFn: deleteName,
     onSuccess: () => namesQuery.refetch(),
   });
-  const addTeamMutation = useMutation({
-    mutationFn: addTeam,
+  const createTeamMutation = useMutation({
+    mutationFn: createTeam,
     onSuccess: () => teamsQuery.refetch(),
   });
-  const addNameMutation = useMutation({
-    mutationFn: addName,
+  const createNameMutation = useMutation({
+    mutationFn: createName,
     onSuccess: () => namesQuery.refetch(),
   });
   return (
@@ -54,7 +62,7 @@ const App = () => {
               isAsso={false}
               deleteMutation={deleteNameMutation}
               updateMutation={updateNameMutation}
-              addMutation={addNameMutation}
+              addMutation={createNameMutation}
               query={namesQuery}
             />
           }
@@ -66,15 +74,9 @@ const App = () => {
               isAsso={true}
               deleteMutation={deleteTeamMutation}
               updateMutation={updateTeamMutation}
-              addMutation={addTeamMutation}
+              addMutation={createTeamMutation}
               query={teamsQuery}
             />
-          }
-        />
-        <Route
-          path='*'
-          element={
-            <Dashboard namesQuery={namesQuery} teamsQuery={teamsQuery} />
           }
         />
       </Routes>

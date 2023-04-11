@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddTeam from '../components/AddTeam';
 import Button from '../components/Button';
@@ -11,6 +11,12 @@ const Admin = ({
   addMutation,
   isAsso,
 }) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (query.isFetched) {
+      setData(isAsso ? query.data.getAllTeams : query.data.getAllNames);
+    }
+  }, [query, isAsso]);
   const [editing, setEditing] = useState(false);
   const [editedScore, setEditedScore] = useState(null);
   const handleScoreClick = (event, team) => {
@@ -42,9 +48,9 @@ const Admin = ({
       </div>
       <AddTeam isAsso={isAsso} addMutation={addMutation} />
       {query.isLoading && <Loader />}
-      {query.isSuccess && (
+      {query.isFetched && (
         <div className='flex flex-col items-center'>
-          {query.data.getAllData
+          {data
             .sort((a, b) => parseInt(b.score) - parseInt(a.score))
             .map((team) => {
               return (
@@ -141,7 +147,7 @@ const Admin = ({
                     />
                   </div>
                   <Button
-                    style='ml-6 whitespace-nowrap stroke-white'
+                    style='whitespace-nowrap stroke-white'
                     type='delete'
                     value={<IconBin />}
                     onClick={() => deleteMutation.mutate(team.name)}
