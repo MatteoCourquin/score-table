@@ -14,8 +14,6 @@ import {
 } from './services/api';
 
 const App = () => {
- 
-
   const teamsQuery = useQuery({
     queryKey: 'teams',
     queryFn: () => getAllTeams(),

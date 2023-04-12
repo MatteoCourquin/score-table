@@ -1,10 +1,10 @@
+import { API, graphqlOperation } from 'aws-amplify';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { subscriptionNameQuery, subscriptionTeamQuery } from '../services/api';
 import { Loader } from './Icons';
 import Row from './Row';
-import { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
-import { subscriptionNameQuery, subscriptionTeamQuery } from '../services/api';
 
 const Table = ({ query, dark, isAsso }) => {
   const [dataTeams, setDataTeams] = useState([]);
