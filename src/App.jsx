@@ -17,12 +17,12 @@ const App = () => {
   const teamsQuery = useQuery({
     queryKey: 'teams',
     queryFn: () => getAllTeams(),
-    // refetchInterval: 10000,
+    refetchInterval: 60000 * 30,
   });
   const namesQuery = useQuery({
     queryKey: 'names',
     queryFn: () => getAllNames(),
-    // refetchInterval: 10000,
+    refetchInterval: 60000 * 30,
   });
   const updateTeamMutation = useMutation({
     mutationFn: updateTeam,

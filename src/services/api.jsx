@@ -1,4 +1,4 @@
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import { gql, GraphQLClient } from 'graphql-request';
 
 const endpoint =
@@ -21,7 +21,16 @@ const myAppConfig = {
 
 Amplify.configure(myAppConfig);
 
-export const subscriptionNameQuery = gql`
+export const subscriptionCreateName = gql`
+  subscription {
+    onCreateName {
+      name
+      score
+    }
+  }
+`;
+
+export const subscriptionUpdateName = gql`
   subscription {
     onNameUpdate {
       name
@@ -30,7 +39,22 @@ export const subscriptionNameQuery = gql`
   }
 `;
 
-export const subscriptionTeamQuery = gql`
+export const subscriptionDeleteName = gql`
+  subscription {
+    onDeleteName
+  }
+`;
+
+export const subscriptionCreateTeam = gql`
+  subscription {
+    onCreateTeam {
+      name
+      score
+    }
+  }
+`;
+
+export const subscriptionUpdateTeam = gql`
   subscription {
     onTeamUpdate {
       name
