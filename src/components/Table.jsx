@@ -11,7 +11,7 @@ import {
 import { Loader } from './Icons';
 import Row from './Row';
 
-const Table = ({ query, dark, isAsso, count }) => {
+const Table = ({ query, dark, isAsso, hasAssos }) => {
   const [dataTeams, setDataTeams] = useState([]);
   const [dataNames, setDataNames] = useState([]);
 
@@ -96,14 +96,15 @@ const Table = ({ query, dark, isAsso, count }) => {
       >
         <Link
           className='text-3xl sm:text-4xl lg:text-5xl font-eulogy whitespace-nowrap text-ellipsis'
-          to={isAsso ? 'admin-asso' : 'admin-name'}
+          to='admin'
         >
           {isAsso ? 'ASSO' : 'JOUEUR'}
         </Link>
         <p
-          className={
+          className={clsx(
+            !hasAssos && 'text-secondary',
             'text-3xl sm:text-4xl lg:text-5xl font-eulogy whitespace-nowrap inline-block text-right'
-          }
+          )}
         >
           SCORE
         </p>
@@ -131,6 +132,7 @@ const Table = ({ query, dark, isAsso, count }) => {
           .map((data, index) => {
             return (
               <Row
+                hasAssos={hasAssos}
                 key={index}
                 style={clsx(index < 3 && 'text-4xl')}
                 dark={dark}

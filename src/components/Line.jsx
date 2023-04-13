@@ -6,24 +6,24 @@ const Line = ({ style, dark }) => {
       <div
         className={clsx(
           dark
-            ? 'bg-secondary shadow-box-secondary'
-            : 'bg-primary shadow-box-primary',
+            ? 'bg-secondary'
+            : 'bg-primary',
           'shrink-0 rounded-full w-[3px] h-[3px]'
         )}
       ></div>
       <div
         className={clsx(
           dark
-            ? 'bg-secondary shadow-box-secondary'
-            : 'bg-primary shadow-box-primary',
+            ? 'bg-secondary '
+            : 'bg-primary',
           'rounded-full w-[2px] h-full'
         )}
       ></div>
       <div
         className={clsx(
           dark
-            ? 'bg-secondary shadow-box-secondary'
-            : 'bg-primary shadow-box-primary',
+            ? 'bg-secondary'
+            : 'bg-primary',
           'shrink-0 rounded-full w-[3px] h-[3px]'
         )}
       ></div>

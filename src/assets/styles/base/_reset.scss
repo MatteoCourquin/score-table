@@ -5,40 +5,38 @@
   padding: 0;
   box-sizing: border-box;
   font-family: $font-arpona;
+
   @media screen and (max-width : 639px) {
     color: $color-primary !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
 }
-body{
+
+body {
   min-height: 100vh;
 }
 
-.background-main{
+.background-main {
   background: url(../images/background.png) no-repeat center center/cover;
+
   @media screen and (max-width : 639px) {
     background: url(../images/background-mobile.png) no-repeat center center/cover;
   }
 }
 
-.shadow-text-primary{
+.shadow-text-primary {
   text-shadow: 0 0 10px #F7DEA7;
 }
-.shadow-text-secondary{
+
+.shadow-text-secondary {
   text-shadow: 0 0 10px #212857;
 }
 
-.shadow-box-primary{
-  box-shadow: 0 0 10px #F7DEA7;
-}
-.shadow-box-secondary{
-  box-shadow: 0 0 10px #212857;
-}
-
-.font-eulogy{
+.font-eulogy {
   font-family: $font-eulogy;
 }
-.font-arpona{
+
+.font-arpona {
   font-family: $font-arpona;
 }

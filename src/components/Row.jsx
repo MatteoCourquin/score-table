@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-const Row = ({ name, score, dark, style }) => {
+const Row = ({ name, score, dark, style, hasAssos }) => {
   return (
     <div
       className={clsx(
@@ -10,7 +10,12 @@ const Row = ({ name, score, dark, style }) => {
       )}
     >
       <p className='capitalize whitespace-nowrap text-ellipsis'>{name}</p>
-      <p className='whitespace-nowrap inline-block text-right font-sans'>
+      <p
+        className={clsx(
+          'whitespace-nowrap inline-block text-right font-sans',
+          !hasAssos && 'sm:!text-secondary'
+        )}
+      >
         {score}
       </p>
     </div>

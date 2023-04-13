@@ -1,163 +1,69 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AddTeam from '../components/AddTeam';
+import { useAuth0 } from '@auth0/auth0-react';
+import clsx from 'clsx';
+import { useState } from 'react';
+import AdminTable from '../components/AdminTable';
 import Button from '../components/Button';
-import { IconBin, IconDashboard, Loader } from '../components/Icons';
+import LoginButton from '../components/Login';
+import LogoutButton from '../components/Logout';
 
 const Admin = ({
-  query,
-  updateMutation,
-  deleteMutation,
-  addMutation,
-  isAsso,
+  deleteNameMutation,
+  updateNameMutation,
+  addNameMutation,
+  namesQuery,
+  deleteTeamMutation,
+  updateTeamMutation,
+  addTeamMutation,
+  teamsQuery,
 }) => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    if (query.isFetched) {
-      setData(isAsso ? query.data.getAllTeams : query.data.getAllNames);
-    }
-  }, [query, isAsso]);
-  const [editing, setEditing] = useState(false);
-  const [editedScore, setEditedScore] = useState(null);
-  const handleScoreClick = (event, team) => {
-    event.preventDefault();
-    setEditing(team.name);
-    setEditedScore(team.score);
-  };
-  const handleScoreChange = (event) => {
-    setEditedScore(event.target.value);
-  };
-  const handleScoreBlur = (team) => {
-    setEditing(false);
-    if (editedScore !== null) {
-      updateMutation.mutate({
-        name: team.name,
-        newScore: parseInt(editedScore),
-      });
-    }
-  };
+  const [adminType, setAdminType] = useState('NAME');
+  const { user, isAuthenticated, isLoading } = useAuth0();
   return (
-    <div className='px-4 bg-white h-screen'>
-      <div className='pl-8 py-10 flex items-center gap-4'>
-        <Link to='/'>
-          <IconDashboard />
-        </Link>
-        <h1 className='text-6xl text-primary font-eulogy'>
-          Admin {isAsso ? 'asso' : 'joueur'}
-        </h1>
-      </div>
-      <AddTeam isAsso={isAsso} addMutation={addMutation} />
-      {query.isLoading && <Loader />}
-      {query.isFetched && (
-        <div className='flex flex-col items-center'>
-          {data
-            .sort((a, b) => parseInt(b.score) - parseInt(a.score))
-            .map((team) => {
-              return (
-                <div
-                  key={team.name}
-                  className='flex flex-row gap-4 items-center justify-between w-full border-b py-1'
-                >
-                  <p className='w-1/3 whitespace-nowrap overflow-hidden text-ellipsis'>
-                    {team.name}
-                  </p>
-                  <div className='flex flex-row gap-2 items-center'>
-                    <Button
-                      style='whitespace-nowrap hidden md:block'
-                      type='click'
-                      value='- 10'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) - 10,
-                        })
-                      }
-                    />
-                    <Button
-                      style='whitespace-nowrap hidden md:block'
-                      type='click'
-                      value='- 5'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) - 5,
-                        })
-                      }
-                    />
-                    <Button
-                      style='whitespace-nowrap hidden sm:block'
-                      type='click'
-                      value='-'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) - 1,
-                        })
-                      }
-                    />
-                    {editing === team.name ? (
-                      <input
-                        className='w-24 text-center font-sans py-1 px-3 border rounded'
-                        type='number'
-                        value={editedScore}
-                        onChange={handleScoreChange}
-                        onBlur={() => handleScoreBlur(team)}
-                        autoFocus
-                      />
-                    ) : (
-                      <p
-                        className='min-w-[70px] text-center py-1 px-3 font-sans border rounded'
-                        onClick={(event) => handleScoreClick(event, team)}
-                      >
-                        {team.score}
-                      </p>
-                    )}
-                    <Button
-                      style='whitespace-nowrap hidden sm:block'
-                      type='click'
-                      value='+'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) + 1,
-                        })
-                      }
-                    />
-                    <Button
-                      style='whitespace-nowrap hidden md:block'
-                      type='click'
-                      value='+ 5'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) + 5,
-                        })
-                      }
-                    />
-                    <Button
-                      style='whitespace-nowrap hidden md:block'
-                      type='click'
-                      value='+ 10'
-                      onClick={() =>
-                        updateMutation.mutate({
-                          name: team.name,
-                          newScore: parseInt(team.score) + 10,
-                        })
-                      }
-                    />
-                  </div>
-                  <Button
-                    style='whitespace-nowrap stroke-white'
-                    type='delete'
-                    value={<IconBin />}
-                    onClick={() => deleteMutation.mutate(team.name)}
-                  />
-                </div>
-              );
-            })}
+    <>
+      {isAuthenticated ? (
+        <div className='p-4 min-h-screen'>
+          <div className='flex justify-center gap-4'>
+            <Button
+              style={clsx(adminType === 'TEAM' && 'opacity-20')}
+              type='click'
+              value='Joueur'
+              onClick={() => setAdminType('NAME')}
+            />
+            <Button
+              style={clsx(adminType === 'NAME' && 'opacity-20')}
+              type='click'
+              value='Asso'
+              onClick={() => setAdminType('TEAM')}
+            />
+          </div>
+          <LogoutButton style='fixed right-4 top-4' />
+          {adminType === 'NAME' ? (
+            <AdminTable
+              isAsso={false}
+              deleteMutation={deleteNameMutation}
+              updateMutation={updateNameMutation}
+              addMutation={addNameMutation}
+              query={namesQuery}
+            />
+          ) : (
+            <AdminTable
+              isAsso={true}
+              deleteMutation={deleteTeamMutation}
+              updateMutation={updateTeamMutation}
+              addMutation={addTeamMutation}
+              query={teamsQuery}
+            />
+          )}
+        </div>
+      ) : (
+        <div className='flex justify-center flex-col items-center h-[80vh]'>
+          <p className='px-4 mb-4 text-center'>
+            Merci de vous connecter pour accédez à la session admin
+          </p>
+          <LoginButton />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

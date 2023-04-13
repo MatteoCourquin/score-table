@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.1",
     "aws-amplify": "^5.0.25",
     "clsx": "^1.2.1",
     "graphql": "^15.0.0",

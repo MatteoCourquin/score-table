@@ -58,26 +58,17 @@ const App = () => {
           }
         />
         <Route
-          path='/admin-name'
+          path='/admin'
           element={
             <Admin
-              isAsso={false}
-              deleteMutation={deleteNameMutation}
-              updateMutation={updateNameMutation}
-              addMutation={createNameMutation}
-              query={namesQuery}
-            />
-          }
-        />
-        <Route
-          path='/admin-asso'
-          element={
-            <Admin
-              isAsso={true}
-              deleteMutation={deleteTeamMutation}
-              updateMutation={updateTeamMutation}
-              addMutation={createTeamMutation}
-              query={teamsQuery}
+              deleteNameMutation={deleteNameMutation}
+              updateNameMutation={updateNameMutation}
+              addNameMutation={createNameMutation}
+              namesQuery={namesQuery}
+              deleteTeamMutation={deleteTeamMutation}
+              updateTeamMutation={updateTeamMutation}
+              addTeamMutation={createTeamMutation}
+              teamsQuery={teamsQuery}
             />
           }
         />

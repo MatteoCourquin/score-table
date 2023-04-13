@@ -13,5 +13,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['graphql']
   },
-  define: { global: {} }
+  define: { global: {} },
 })
