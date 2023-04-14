@@ -10,6 +10,13 @@ function AddTeam({ isAsso, addMutation, query }) {
   const [isExist, setIsExist] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const isExistData = (nameVerif) =>
+    (isAsso ? query.data.getAllTeams : query.data.getAllNames)
+      .map((name) => name.name.toLocaleLowerCase())
+      .includes(nameVerif.toLocaleLowerCase())
+      ? setIsExist(true)
+      : setIsExist(false);
+
   return (
     <>
       <button
@@ -56,15 +63,7 @@ function AddTeam({ isAsso, addMutation, query }) {
                   event.target.value == ''
                     ? setIsErrorName(true)
                     : setIsErrorName(false);
-                  if (
-                    (isAsso ? query.data.getAllTeams : query.data.getAllNames)
-                      .map((name) => name.name.toLocaleLowerCase())
-                      .includes(event.target.value.toLocaleLowerCase())
-                  ) {
-                    setIsExist(true);
-                  } else {
-                    setIsExist(false);
-                  }
+                  isExistData(event.target.value);
                 }}
               />
             </div>
@@ -98,7 +97,13 @@ function AddTeam({ isAsso, addMutation, query }) {
               <Button
                 type='cancel'
                 value='Annuler'
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false)
+                  setName('')
+                  setIsExist(false)
+                  setIsErrorName(false)
+                  setIsErrorScore(false)
+                }}
               />
               <Button
                 type='validate'
@@ -109,6 +114,7 @@ function AddTeam({ isAsso, addMutation, query }) {
                   }
                   addMutation.mutate({ name, score });
                   setIsError(false);
+                  setIsExist(false);
                   setName('');
                   setScore('');
                   setIsOpen(false);

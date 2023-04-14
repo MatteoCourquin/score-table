@@ -38,7 +38,7 @@ const AdminTable = ({
     }
   };
   return (
-    <div className='px-4 bg-white'>
+    <div className='px-4 bg-white pb-[20vh]'>
       <div className='pl-8 py-10 flex items-center gap-4'>
         <Link to='/'>
           <IconDashboard />

@@ -7,9 +7,9 @@ const Dashboard = ({ teamsQuery, namesQuery }) => {
   const [hasAssos, setHasAssos] = useState(false);
   return (
     <>
-      <div className='fixed bottom-0 right-0 p-4'>
+      <div className='fixed bottom-0 right-0 p-4 z-10'>
         <button
-          className='text-secondary !font-arpona text-xl px-4 py-2 rounded-md'
+          className='text-secondary !font-arpona text-xl px-4 py-2 rounded-md bg-primary'
           onClick={() => setHasAssos(!hasAssos)}
         >
           {hasAssos ? 'Masquer' : 'Afficher'} les assos

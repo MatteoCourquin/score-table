@@ -3,7 +3,7 @@ import { gql, GraphQLClient } from 'graphql-request';
 
 const endpoint =
   'https://3nhzv3yib5aqfherckwq5z6i3i.appsync-api.eu-west-1.amazonaws.com/graphql';
-const apiKey = 'da2-zqdvhftytfhujagxtlesedrmkq';
+const apiKey = 'da2-pmbnqtrjibfflawk2kjyvsa2ua';
 
 const client = new GraphQLClient(endpoint, {
   headers: {
@@ -16,7 +16,7 @@ const myAppConfig = {
     'https://3nhzv3yib5aqfherckwq5z6i3i.appsync-api.eu-west-1.amazonaws.com/graphql',
   aws_appsync_region: 'eu-west-1',
   aws_appsync_authenticationType: 'API_KEY',
-  aws_appsync_apiKey: 'da2-zqdvhftytfhujagxtlesedrmkq',
+  aws_appsync_apiKey: 'da2-pmbnqtrjibfflawk2kjyvsa2ua',
 };
 
 Amplify.configure(myAppConfig);
