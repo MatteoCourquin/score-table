@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import Button from './Button';
-import clsx from 'clsx';
 
 function AddTeam({ isAsso, addMutation, query }) {
   const [name, setName] = useState('');
@@ -22,13 +22,20 @@ function AddTeam({ isAsso, addMutation, query }) {
       {isOpen && (
         <div className='fixed top-0 left-0 w-screen h-screen bg-gray-900 bg-opacity-50 flex items-center justify-center'>
           <div className='bg-white rounded-lg p-6 w-96'>
-            {(isErrorName || isErrorScore) && <p className='text-red-500'>Veuillez remplir les champs obligatoires</p>}
+            {(isErrorName || isErrorScore) && (
+              <p className='text-red-500'>
+                Veuillez remplir les champs obligatoires
+              </p>
+            )}
             <div className='mb-4'>
               <label
                 className='font-sans block text-gray-700 font-bold mb-2'
                 htmlFor='name'
               >
-                {isAsso ? "Nom de l'asso" : 'Nom du joueur'}{isErrorName && <span className='text-red-500 font-sans'> *</span>}
+                {isAsso ? "Nom de l'asso" : 'Nom du joueur'}
+                {isErrorName && (
+                  <span className='text-red-500 font-sans'> *</span>
+                )}
               </label>
               {isExist && (
                 <p className='text-red-500'>
@@ -66,7 +73,10 @@ function AddTeam({ isAsso, addMutation, query }) {
                 className='font-sans block text-gray-700 font-bold mb-2'
                 htmlFor='score'
               >
-                {isAsso ? "Score de l'asso" : 'Score du joueur'}{isErrorScore && <span className='text-red-500 font-sans'> *</span>}
+                {isAsso ? "Score de l'asso" : 'Score du joueur'}
+                {isErrorScore && (
+                  <span className='text-red-500 font-sans'> *</span>
+                )}
               </label>
               <input
                 className={clsx(

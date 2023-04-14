@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import clsx from 'clsx';
 import Button from './Button';
 import { IconLogout } from './Icons';
-import clsx from 'clsx';
 
 const LogoutButton = ({ style }) => {
   const { logout } = useAuth0();
